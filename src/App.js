@@ -74,9 +74,24 @@ function App() {
     setCartData(newCart);
   };
 
+  const subMealHandler = (meal) => {
+    const newCart = { ...cartData };
+    meal.amount -= 1;
+    if (meal.amount === 0) {
+      newCart.items.splice(newCart.items.indexOf(meal), 1);
+    }
+    newCart.totalAmount -= 1;
+    newCart.totalPrice -= meal.price;
+    setCartData(newCart);
+  };
+
   return (
     <div>
-      <Meals onAdd={addMealHandler} mealsData={mealsData} />
+      <Meals
+        onAdd={addMealHandler}
+        onSub={subMealHandler}
+        mealsData={mealsData}
+      />
     </div>
   );
 }
