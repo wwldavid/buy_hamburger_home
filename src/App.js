@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Meals from "./components/Meals/Meals";
+import CartContext from "./store/cart-context";
 
 const MEALS_DATA = [
   {
@@ -61,7 +62,7 @@ function App() {
     totalPrice: 0,
   });
 
-  const addMealHandler = (meal) => {
+  const addItem = (meal) => {
     const newCart = { ...cartData };
     if (newCart.items.indexOf(meal) === -1) {
       newCart.items.push(meal);
@@ -74,7 +75,7 @@ function App() {
     setCartData(newCart);
   };
 
-  const subMealHandler = (meal) => {
+  const removeItem = (meal) => {
     const newCart = { ...cartData };
     meal.amount -= 1;
     if (meal.amount === 0) {
@@ -86,13 +87,11 @@ function App() {
   };
 
   return (
-    <div>
-      <Meals
-        onAdd={addMealHandler}
-        onSub={subMealHandler}
-        mealsData={mealsData}
-      />
-    </div>
+    <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
+      <div>
+        <Meals mealsData={mealsData} />
+      </div>
+    </CartContext.Provider>
   );
 }
 
