@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./Cart.module.css";
 import iconImg from "../../asset/bag.png";
 import CartContext from "../../store/cart-context";
@@ -7,9 +7,15 @@ import CartDetails from "./CartDetails/CartDetails";
 const Cart = () => {
   const ctx = useContext(CartContext);
 
+  const [showDetails, setShowDetails] = useState(false);
+  const toggle = () => {
+    if (ctx.totalAmount === 0) return;
+    setShowDetails((prevState) => !prevState);
+  };
+
   return (
-    <div className={classes.Cart}>
-      <CartDetails />
+    <div className={classes.Cart} onClick={toggle}>
+      {showDetails && <CartDetails />}
       <div className={classes.Icon}>
         <img src={iconImg} />
         {ctx.totalAmount === 0 ? null : (
