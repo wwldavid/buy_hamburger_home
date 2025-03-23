@@ -3,18 +3,33 @@ import classes from "./Cart.module.css";
 import iconImg from "../../asset/bag.png";
 import CartContext from "../../store/cart-context";
 import CartDetails from "./CartDetails/CartDetails";
+import Checkout from "./Checkout/Checkout";
 
 const Cart = () => {
   const ctx = useContext(CartContext);
 
   const [showDetails, setShowDetails] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
   const toggle = () => {
-    if (ctx.totalAmount === 0) return;
+    if (ctx.totalAmount === 0) {
+      setShowDetails(false);
+      return;
+    }
     setShowDetails((prevState) => !prevState);
+  };
+
+  const showCheckoutHandler = () => {
+    if (ctx.totalAmount === 0) return;
+    setShowCheckout(true);
+  };
+
+  const hideCheckoutHandler = () => {
+    setShowCheckout(false);
   };
 
   return (
     <div className={classes.Cart} onClick={toggle}>
+      {showCheckout && <Checkout onHide={hideCheckoutHandler} />}
       {showDetails && <CartDetails />}
       <div className={classes.Icon}>
         <img src={iconImg} />
@@ -30,6 +45,7 @@ const Cart = () => {
       )}
 
       <button
+        onClick={showCheckoutHandler}
         className={`${classes.Button} ${
           ctx.totalAmount === 0 ? classes.Disabled : ""
         }`}
