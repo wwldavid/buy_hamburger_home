@@ -26,6 +26,11 @@
   font-size: 20rem;
 }
 
+.Meals {
+  max-height: 800rem;
+  overflow: auto;
+}
+
 .Footer {
   position: relative;
   height: 120rem;

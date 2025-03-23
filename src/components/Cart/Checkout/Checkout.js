@@ -4,6 +4,7 @@ import classes from "./Checkout.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import CartContext from "../../../store/cart-context";
+import CheckoutItem from "./CheckoutItem/CheckoutItem";
 
 const checkoutRoot = document.getElementById("checkout-root");
 
@@ -20,7 +21,13 @@ const Checkout = (props) => {
         <header className={classes.Header}>
           <h2 className={classes.Title}>meal list</h2>
         </header>
-        <div>meal list</div>
+
+        <div className={classes.Meals}>
+          {ctx.items.map((item) => (
+            <CheckoutItem key={item.id} meal={item} />
+          ))}
+        </div>
+
         <footer className={classes.Footer}>
           <p className={classes.TotalPrice}>{ctx.totalPrice}</p>
         </footer>
