@@ -23,7 +23,7 @@ const MEALS_DATA = [
     id: "3",
     title: "Big MAC hamburger",
     desc: "here is best delicioua beef hamburger for you every day",
-    price: 123,
+    price: 23,
     img: "/img/meals/3.png",
   },
   {
@@ -95,8 +95,20 @@ function App() {
     setCartData(newCart);
   };
 
+  const clearCart = () => {
+    const newCart = { ...cartData };
+    newCart.items.forEach((item) => delete item.amount);
+    newCart.items = [];
+    newCart.totalAmount = 0;
+    newCart.totalPrice = 0;
+
+    setCartData(newCart);
+  };
+
   return (
-    <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
+    <CartContext.Provider
+      value={{ ...cartData, addItem, removeItem, clearCart }}
+    >
       <div>
         <FilterMeals onFilter={filterHandler} />
         <Meals mealsData={mealsData} />
