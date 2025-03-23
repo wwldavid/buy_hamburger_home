@@ -32,7 +32,8 @@
   font-size: 22rem;
   right: -10rem;
 }
-.Price {
+.Price,
+.NoMeal {
   display: flex;
   align-items: center;
   margin-left: 120rem;
@@ -41,6 +42,11 @@
   font-size: 40rem;
   z-index: 9999;
 }
+
+.NoMeal {
+  color: #aaa;
+}
+
 .Price::before {
   content: "¥";
   font-size: 30rem;
@@ -52,4 +58,9 @@
   width: 200rem;
   border-radius: 20px;
   font-size: 30rem;
+}
+
+.Disabled {
+  background-color: #777;
+  color: #ccc;
 }
