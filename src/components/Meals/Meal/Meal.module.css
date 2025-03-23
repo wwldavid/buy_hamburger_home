@@ -9,11 +9,14 @@
 .ImgBox {
   width: 250rem;
 }
+
 img {
   width: 100%;
 }
-.text {
+
+.DescBox {
   padding: 0 20rem;
+  flex: auto;
 }
 .title {
   font-weight: normal;
