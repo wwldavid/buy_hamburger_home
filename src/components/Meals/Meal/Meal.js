@@ -8,12 +8,14 @@ const Meal = (props) => {
       <div className={classes.ImgBox}>
         <img src={props.meal.img} />
       </div>
-      <div className={classes.text}>
+      <div className={classes.DescBox}>
         <h2 className={classes.title}>{props.meal.title}</h2>
-        <p className={classes.desc}>{props.meal.desc}</p>
+        {props.noDesc ? null : (
+          <p className={classes.desc}>{props.meal.desc}</p>
+        )}
         <div className={classes.PriceWrapper}>
           <span className={classes.price}>{props.meal.price}</span>
-          <Counter meal={props.meal} onAdd={props.onAdd} />
+          <Counter meal={props.meal} />
         </div>
       </div>
     </div>
